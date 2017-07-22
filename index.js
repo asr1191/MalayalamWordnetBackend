@@ -22,12 +22,9 @@ app.get('/wordnet', function(request,response){
   console.log('Encoded Request Parameter',encodeURIComponent(request.param('q')));
   wordnetRequest(request.param('q'),function(str){
     $ = cheerio.load(str);
-    response.send(function(){
-      //RESPONSE BODY HERE, USE CHEERIO
-      var detail = $('#detail').html();
-      console.log('Cheerio#detail',detail);
-      return detail;
-    });
+    var detail = $('#detail').html();
+    console.log('Cheerio#detail',detail);
+    response.send(detail);
   });
   
 });
