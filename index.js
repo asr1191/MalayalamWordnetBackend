@@ -21,7 +21,13 @@ app.get('/wordnet', function(request,response){
   console.log('Request Parameter',request.param("q"));
   console.log('Encoded Request Parameter',encodeURIComponent(request.param('q')));
   wordnetRequest(request.param('q'),function(str){
-    response.send(str);
+    $ = cheerio.load(str);
+    response.send(function(){
+      //RESPONSE BODY HERE, USE CHEERIO
+      var detail = $('#detail').html();
+      console.log('Cheerio#detail',detail);
+      return detail;
+    });
   });
   
 });
