@@ -20,9 +20,9 @@ app.get('/cool', function(request,response){
 });
 
 app.get('/wordnet', function(request,response){
+  console.log('Request Parameter',request.param(q));
+  console.log('Encoded Request Parameter',encodeURIComponent(request.param(q)));
   wordnetRequest(request.param('q'),function(str){
-    console.log('Request Parameter',q);
-    console.log('Encoded Request Parameter',encodeURIComponent(q))
     response.send(str);
   });
   
