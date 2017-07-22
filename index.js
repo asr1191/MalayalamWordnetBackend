@@ -21,6 +21,8 @@ app.get('/cool', function(request,response){
 
 app.get('/wordnet', function(request,response){
   wordnetRequest(request.param('q'),function(str){
+    console.log('Request Parameter',q);
+    console.log('Encoded Request Parameter',encodeURIComponent(q))
     response.send(str);
   });
   
@@ -37,7 +39,7 @@ function wordnetRequest(q, mainCallback) {
 
   var options = {
     host: 'www.cfilt.iitb.ac.in',
-    path: '/indowordnet/first?langno=9&queryword=' + q
+    path: '/indowordnet/first?langno=9&queryword=' + encodeURIComponent(q)
   };
 
   callback = function(response) {
