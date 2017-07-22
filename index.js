@@ -1,6 +1,7 @@
 var http = require('http');
 var express = require('express');
-var cool = require('cool-ascii-faces');
+const cheerio = require('cheerio');
+
 var app = express();
 
 app.set('port', (process.env.PORT || 5000));
@@ -15,11 +16,8 @@ app.get('/', function(request, response) {
   response.render('pages/index');
 });
 
-app.get('/cool', function(request,response){
-  response.send(cool());
-});
-
 app.get('/wordnet', function(request,response){
+  response.header('Access-Control-Allow-Origin','*');
   console.log('Request Parameter',request.param("q"));
   console.log('Encoded Request Parameter',encodeURIComponent(request.param('q')));
   wordnetRequest(request.param('q'),function(str){
@@ -52,7 +50,7 @@ function wordnetRequest(q, mainCallback) {
 
     //the whole response has been recieved, so we just print it out here
     response.on('end', function () {
-      console.log(str);
+      console.log(str.slice(0,50));
       mainCallback(str);
     });
   }
