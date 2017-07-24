@@ -30,7 +30,7 @@ app.get('/wordnet', function(request,response){
 
   wordnetRequest(request.query.q,function(str){//Passes WORD from "app.com/wordnet?q=WORD" to wordnetRequest(q,mainCallback) function defined below, and after wordnetRequest is finished, it calls the function(str) defined in this line
     $ = cheerio.load(str); //str is the entire webpage from www.cfilt.iitb.ac.in/indowordnet/first?langno=9&queryword=WORD, then loaded Cheerio
-    var json = { pos : "", synonyms : "", gloss : "", example_statement: "", glossenglish :""};
+    var json = { pos : "", synonyms : [], gloss : "", example_statement: "", glossenglish :""};
 
  
     $('#words').find('a').each(function(){
