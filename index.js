@@ -39,11 +39,12 @@ app.get('/wordnet', function(request,response){
 
     json.pos = $('#pos').first().text(); console.log(json.pos);
 
-    json.gloss = $('#gloss').first().text();
+    json.gloss = $('#gloss').first().text().replace("\n","").replace(" ","").replace("\\","").replace(";","").trim().replace("\\n","");
 
-    json.example_statement = $("#ex_stmt").first().text();
+    json.example_statement = $("#ex_stmt").first().text().replace("\n","").replace(" ","").replace("\\","").replace(";","").trim().replace("\\n","");
 
-    json.glossenglish = $('#gloss_eng').first().text();
+    json.glossenglish = $('#gloss_eng').first().text().replace("\n","").replace(" ","").replace("\\","").replace(";","").trim().replace("\\n","");
+
 
     
     var stringified =  JSON.stringify(json);
