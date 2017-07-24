@@ -21,7 +21,10 @@ app.get('/', function(request, response) { //Use pages/index.ejs file when someo
 //Use request variable to see details about the request.
 //Use response variable to set details of the response that should be given out, when a user GETs "app.com/wordnet"
 app.get('/wordnet', function(request,response){ 
+
   response.header('Access-Control-Allow-Origin','*');                             //Enable CORS by adding the Access-Control-Allow-Origin header to the response.
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  
   console.log('Request Parameter',request.query.q);                            //For Testing
   console.log('Encoded Request Parameter',encodeURIComponent(request.query.q));//For testing
   wordnetRequest(request.query.q,function(str){//Passes WORD from "app.com/wordnet?q=WORD" to wordnetRequest(q,mainCallback) function defined below, and after wordnetRequest is finished, it calls the function(str) defined in this line
