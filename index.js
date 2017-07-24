@@ -26,11 +26,18 @@ app.get('/wordnet', function(request,response){
   console.log('Encoded Request Parameter',encodeURIComponent(request.query.q));//For testing
   wordnetRequest(request.query.q,function(str){//Passes WORD from "app.com/wordnet?q=WORD" to wordnetRequest(q,mainCallback) function defined below, and after wordnetRequest is finished, it calls the function(str) defined in this line
     $ = cheerio.load(str); //str is the entire webpage from www.cfilt.iitb.ac.in/indowordnet/first?langno=9&queryword=WORD, then loaded Cheerio
-    var pos, syn, gloss, exstmt, gloeng;
     var json = { pos : "", synonyms : "", gloss : "", example_statement: "", glossenglish :""};
-    pos = $('#gloss').text();
-    console.log('Cheerio#pos',pos);//For Testing
-    response.send(pos);//Sends back the scraped html back to the user  
+
+    json.gloss = $('#gloss').text();
+    json.glossenglish = $('#gloss_eng').text();
+    json.pos = $('#pos').text();
+    json.synonyms = $('#words').text();
+    json.example_statement = $('#ex_stmt').text();
+
+    var stringified =  JSON.stringify(json);
+
+    console.log('Json Stringified', stringified);//For Testing
+    response.send(stringified);//Sends back the scraped html back to the user  
   });
 });
 
