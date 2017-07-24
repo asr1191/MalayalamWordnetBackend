@@ -34,7 +34,7 @@ app.get('/wordnet', function(request,response){
 
  
     $('#words').find('a').each(function(){
-        json.synonyms = json.synonyms + $(this).text();
+        json.synonyms = json.synonyms + [$(this).text()];
     });
 
 
