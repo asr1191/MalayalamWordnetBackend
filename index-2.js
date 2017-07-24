@@ -30,21 +30,23 @@ app.get('/wordnet', function(request,response){
 
   wordnetRequest(request.query.q,function(str){//Passes WORD from "app.com/wordnet?q=WORD" to wordnetRequest(q,mainCallback) function defined below, and after wordnetRequest is finished, it calls the function(str) defined in this line
     $ = cheerio.load(str); //str is the entire webpage from www.cfilt.iitb.ac.in/indowordnet/first?langno=9&queryword=WORD, then loaded Cheerio
-    var json = { pos : "", synonyms : "", gloss : "", example_statement: "", glossenglish :""};
+    var json = { pos : "", synonyms : [], gloss : "", example_statement: "", glossenglish :""};
 
-    json.gloss = $('#gloss').text().replace("\n","").replace(" ","").replace("\\","").replace(";","").trim().replace("\\n","");
-    json.glossenglish = $('#gloss_eng').text().replace("\n","").replace(" ","").replace("\\","").replace(";","").trim().replace("\\n","");
-    json.pos = $('#pos').text().replace("\n","").replace(" ","").replace("\\","").replace(";","").trim().replace("\\n","");
-    
     $('#words').find('a').each(function(){
-        json.synonyms = json.synonyms + $(this).text();
+        synonyms = synonyms + $(this).text();
     });
 
 
-    json.example_statement = $('#ex_stmt').text().replace("\n","").replace(" ","").replace("\\","").replace(";","").trim().replace("\\n","");
+
+
+
+
+
+
+
+
 
     var stringified =  JSON.stringify(json);
-    stringified = stringified.replace("\n","").replace(" ","").replace("\\","").replace(";","").trim().replace("\\n","");
 
     console.log('Json Stringified', stringified);//For Testing
     console.log('Json Parsed',JSON.parse(stringified));
