@@ -23,10 +23,11 @@ app.get('/', function(request, response) { //Use pages/index.ejs file when someo
 app.get('/wordnet', function(request,response){ 
 
   response.header('Access-Control-Allow-Origin','*');                             //Enable CORS by adding the Access-Control-Allow-Origin header to the response.
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  
+  //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+
   console.log('Request Parameter',request.query.q);                            //For Testing
   console.log('Encoded Request Parameter',encodeURIComponent(request.query.q));//For testing
+
   wordnetRequest(request.query.q,function(str){//Passes WORD from "app.com/wordnet?q=WORD" to wordnetRequest(q,mainCallback) function defined below, and after wordnetRequest is finished, it calls the function(str) defined in this line
     $ = cheerio.load(str); //str is the entire webpage from www.cfilt.iitb.ac.in/indowordnet/first?langno=9&queryword=WORD, then loaded Cheerio
     var json = { pos : "", synonyms : "", gloss : "", example_statement: "", glossenglish :""};
