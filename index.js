@@ -22,21 +22,16 @@ app.get('/', function(request, response) { //Use pages/index.ejs file when someo
 //Use response variable to set details of the response that should be given out, when a user GETs "app.com/wordnet"
 app.get('/wordnet', function(request,response){ 
   response.header('Access-Control-Allow-Origin','*');                             //Enable CORS by adding the Access-Control-Allow-Origin header to the response.
-  console.log('Request Parameter',request.param("q"));                            //For Testing
-  console.log('Encoded Request Parameter',encodeURIComponent(request.param('q')));//For testing
-  wordnetRequest(request.param('q'),function(str){//Passes WORD from "app.com/wordnet?q=WORD" to wordnetRequest(q,mainCallback) function defined below, and after wordnetRequest is finished, it calls the function(str) defined in this line
+  console.log('Request Parameter',request.query.q);                            //For Testing
+  console.log('Encoded Request Parameter',encodeURIComponent(request.query.q));//For testing
+  wordnetRequest(request.query.q,function(str){//Passes WORD from "app.com/wordnet?q=WORD" to wordnetRequest(q,mainCallback) function defined below, and after wordnetRequest is finished, it calls the function(str) defined in this line
     $ = cheerio.load(str); //str is the entire webpage from www.cfilt.iitb.ac.in/indowordnet/first?langno=9&queryword=WORD, then loaded Cheerio
     var pos, syn, gloss, exstmt, gloeng;
     var json = { pos : "", synonyms : "", gloss : "", example_statement: "", glossenglish :""};
-    $('#gloss').filter(function(){
-                var data = $(this);
-                pos = data.text();
-    var detail = $('#detail').html(); //Scrape ROUGHLY what we need
-    console.log('Cheerio#detail',detail);//For Testing
-    response.send(pos);//Sends back the scraped html back to the user
+    pos = $('#gloss').text();
+    console.log('Cheerio#pos',pos);//For Testing
+    response.send(pos);//Sends back the scraped html back to the user  
   });
-  
-});
 });
 
 
