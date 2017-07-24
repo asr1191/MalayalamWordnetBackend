@@ -24,13 +24,6 @@ app.get('/wordnet', function(request,response){
   response.header('Access-Control-Allow-Origin','*');                             //Enable CORS by adding the Access-Control-Allow-Origin header to the response.
   console.log('Request Parameter',request.param("q"));                            //For Testing
   console.log('Encoded Request Parameter',encodeURIComponent(request.param('q')));//For testing
-<<<<<<< HEAD
-  wordnetRequest(request.param('q'),function(str){                                //Passes WORD from "app.com/wordnet?q=WORD" to wordnetRequest(q,mainCallback) function defined below, and after wordnetRequest is finished, it calls the function(str) defined in this line
-    $ = cheerio.load(str);                                                        //str is the entire webpage from www.cfilt.iitb.ac.in/indowordnet/first?langno=9&queryword=WORD, then loaded Cheerio
-    var detail = $('#detail').html();                                             //Scrape ROUGHLY what we need
-    console.log('Cheerio#detail',detail);                                         //For Testing
-    response.send(detail);                                                        //Sends back the scraped html back to the user
-=======
   wordnetRequest(request.param('q'),function(str){//Passes WORD from "app.com/wordnet?q=WORD" to wordnetRequest(q,mainCallback) function defined below, and after wordnetRequest is finished, it calls the function(str) defined in this line
     $ = cheerio.load(str); //str is the entire webpage from www.cfilt.iitb.ac.in/indowordnet/first?langno=9&queryword=WORD, then loaded Cheerio
     var pos, syn, gloss, exstmt, gloeng;
@@ -41,10 +34,11 @@ app.get('/wordnet', function(request,response){
     var detail = $('#detail').html(); //Scrape ROUGHLY what we need
     console.log('Cheerio#detail',detail);//For Testing
     response.send(pos);//Sends back the scraped html back to the user
->>>>>>> 8388b68cb4ab3fd498c64ae6a74e86d3e809d38f
   });
   
 });
+});
+
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
@@ -57,12 +51,14 @@ function wordnetRequest(q, mainCallback) {
     host: 'www.cfilt.iitb.ac.in',
     path: '/indowordnet/first?langno=9&queryword=' + encodeURIComponent(q)
   };
+
   callback = function(response) {
     var str = '';
     //another chunk of data has been recieved, so append it to `str`
     response.on('data', function (chunk) {
       str += chunk;
     });
+
     //the whole response has been recieved, so we just print it out here
     response.on('end', function () {
       console.log(str.slice(0,50));
