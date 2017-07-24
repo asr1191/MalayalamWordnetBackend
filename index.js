@@ -37,6 +37,7 @@ app.get('/wordnet', function(request,response){
     var stringified =  JSON.stringify(json);
 
     console.log('Json Stringified', stringified.trim());//For Testing
+    console.log('Json Parsed',JSON.parse(stringified));
     response.send(stringified.trim());//Sends back the scraped html back to the user  
   });
 });
