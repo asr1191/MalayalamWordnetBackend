@@ -39,6 +39,7 @@ app.get('/wordnet', function(request,response){
     json.example_statement = $('#ex_stmt').text().replace("\n","").replace(" ","").replace("\\","").replace(";","").trim().replace("\\n","");
 
     var stringified =  JSON.stringify(json);
+    stringified.replace("\n","").replace(" ","").replace("\\","").replace(";","").trim().replace("\\n","");
 
     console.log('Json Stringified', stringified);//For Testing
     console.log('Json Parsed',JSON.parse(stringified));
