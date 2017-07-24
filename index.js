@@ -28,16 +28,16 @@ app.get('/wordnet', function(request,response){
     $ = cheerio.load(str); //str is the entire webpage from www.cfilt.iitb.ac.in/indowordnet/first?langno=9&queryword=WORD, then loaded Cheerio
     var json = { pos : "", synonyms : "", gloss : "", example_statement: "", glossenglish :""};
 
-    json.gloss = $('#gloss').text();
-    json.glossenglish = $('#gloss_eng').text();
-    json.pos = $('#pos').text();
-    json.synonyms = $('#words').text();
-    json.example_statement = $('#ex_stmt').text();
+    json.gloss = $('#gloss').text().trim();
+    json.glossenglish = $('#gloss_eng').text().trim();
+    json.pos = $('#pos').text().trim();
+    json.synonyms = $('#words').text().trim();
+    json.example_statement = $('#ex_stmt').text().trim();
 
     var stringified =  JSON.stringify(json);
 
     console.log('Json Stringified', stringified.trim());//For Testing
-    console.log('Json Parsed',JSON.parse(stringified));
+    console.log('Json Parsed',JSON.parse(stringified.trim()));
     response.send(stringified.trim());//Sends back the scraped html back to the user  
   });
 });
