@@ -37,7 +37,7 @@ app.get('/wordnet', function(request,response){
         json.synonyms.push($(this).text());
     });
 
-    json.pos = $('#pos').first().text();
+    json.pos = $('#pos').first().text(); console.log(json.pos);
 
     json.gloss = $('#gloss').first().text();
 
