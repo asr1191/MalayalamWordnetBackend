@@ -33,10 +33,17 @@ app.get('/wordnet', function(request,response){
     var json = { pos : "", synonyms : [], gloss : "", example_statement: "", glossenglish :""};
 
  
-    $('#words').find('a').each(function(){
+    $('#words').first().find('a').each(function(){
         json.synonyms.push($(this).text());
     });
 
+    json.pos = $('#pos').first().text();
+
+    json.gloss = $('#gloss').first().text();
+
+    json.example_statement = $("#ex_stmt").first().text();
+
+    json.glossenglish = $('#gloss_eng').first().text();
 
     
     var stringified =  JSON.stringify(json);
