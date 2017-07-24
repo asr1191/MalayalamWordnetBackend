@@ -32,11 +32,11 @@ app.get('/wordnet', function(request,response){
     $ = cheerio.load(str); //str is the entire webpage from www.cfilt.iitb.ac.in/indowordnet/first?langno=9&queryword=WORD, then loaded Cheerio
     var json = { pos : "", synonyms : "", gloss : "", example_statement: "", glossenglish :""};
 
-    json.gloss = $('#gloss').text().replace("\n","").replace(" ","").replace("\\","").replace(";","").trim();
-    json.glossenglish = $('#gloss_eng').text().replace("\n","").replace(" ","").replace("\\","").replace(";","").trim();
-    json.pos = $('#pos').text().replace("\n","").replace(" ","").replace("\\","").replace(";","").trim();
-    json.synonyms = $('#words').text().replace("\n","").replace(" ","").replace("\\","").replace(";","").trim();
-    json.example_statement = $('#ex_stmt').text().replace("\n","").replace(" ","").replace("\\","").replace(";","").trim();
+    json.gloss = $('#gloss').text().replace("\n","").replace(" ","").replace("\\","").replace(";","").trim().replace("\\n","");
+    json.glossenglish = $('#gloss_eng').text().replace("\n","").replace(" ","").replace("\\","").replace(";","").trim().replace("\\n","");
+    json.pos = $('#pos').text().replace("\n","").replace(" ","").replace("\\","").replace(";","").trim().replace("\\n","");
+    json.synonyms = $('#words').text().replace("\n","").replace(" ","").replace("\\","").replace(";","").trim().replace("\\n","");
+    json.example_statement = $('#ex_stmt').text().replace("\n","").replace(" ","").replace("\\","").replace(";","").trim().replace("\\n","");
 
     var stringified =  JSON.stringify(json);
 
